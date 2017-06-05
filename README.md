@@ -285,10 +285,8 @@ OS:           Windows 7 6.1 amd64
 * method POST tekan Submit akan menghasilkan data JSON
 
 * begitu selanjutnya untuk method DELETE, PUT	
-==========================================================================
 
 *** Bagian create RestAPI telah selesai di buat ***
-
 
 
 * Membuat halaman view dengan angularjs
@@ -351,7 +349,7 @@ OS:           Windows 7 6.1 amd64
 * create table for get api data from angularjs di file list.html
 
 	ng-repeat="a in dataAlamat.content" untuk mengisi data pada table
-
+	```html
 	<div ng-controller="AlamatController">	
 		<table border="1">
 			<thead>
@@ -372,7 +370,7 @@ OS:           Windows 7 6.1 amd64
 			</tbody>	
 		</table>
 	</div>
-	
+	```
 *	script berikut untuk menampilkan data pada table dengan ng-controller="AlamatController" untuk scope didalam AlamatController pada file app.js
 	
 	appLatihan.controller('AlamatController', function($http, $scope){
@@ -392,7 +390,7 @@ OS:           Windows 7 6.1 amd64
 	});
 
 * create button Hapus di table alamat pada list.html
-
+	```html
 	<div ng-controller="AlamatController">
 		<table border="1">
 			<thead>
@@ -415,7 +413,7 @@ OS:           Windows 7 6.1 amd64
 			</tbody>	
 		</table>
 	</div>
-		
+	```
 * create script ng-click="hapusAlamat(a)" di latihan.js
 
 	$scope.hapusAlamat = function(x){
@@ -437,7 +435,7 @@ OS:           Windows 7 6.1 amd64
 	<script src="/js/semantic.min.js" />
 	
 * script table sesudah di berikan fitur semantic-ui
-
+	```html
 	<table class="ui celled table">
 		<thead>
 			<tr>
@@ -476,9 +474,9 @@ OS:           Windows 7 6.1 amd64
 			</tr>
 		</tfoot>	
 	</table>	
-		
+	```	
 * create from input 
-
+	```html
 	<table class="ui table">
 		<tr>
 			<th colspan="3">
@@ -512,7 +510,7 @@ OS:           Windows 7 6.1 amd64
 			</th>
 		</tr>
 	</table>
-		
+	```
 * create script ng-click="simpanAlamat()" di latihan js
 
 	$scope.simpanAlamat = function(){
@@ -526,8 +524,6 @@ OS:           Windows 7 6.1 amd64
 			alert('Error : '+response);
 		};
 	};
-	
-	<<<==============================
 	
 *Create security for web app
 
@@ -572,7 +568,7 @@ OS:           Windows 7 6.1 amd64
 	 registry.addViewController("/login").setViewName("/login");
 
 * create login.html custom di folder templates dari thymeleaf
-	
+	```html
 	<!DOCTYPE html>
 	<html>
 	<head>
@@ -584,7 +580,7 @@ OS:           Windows 7 6.1 amd64
 
 	</body>
 	</html>
-
+	```
 * add script SecurityConfiguration.java
 
 	@Override
@@ -599,7 +595,7 @@ OS:           Windows 7 6.1 amd64
 	}
 	
 * perbaiki halaman login.html diatas sehingga bisa digunakan untuk login	
-	
+	```html
 	<!DOCTYPE html>
 	<html>
 	<head>
@@ -630,7 +626,7 @@ OS:           Windows 7 6.1 amd64
 		<script src="js/bootstrap.min.js" />
 	</body>
 	</html>
-	
+	```
 * karena halaman login ini di buat menggunakan bootstrap maka siapkan lokasi untuk file css dan js jika di perlukan pada folder /static/js dan /statis/css didalam package src/main/resources
 	static/css/
 						bootstrap.min.css
@@ -675,14 +671,13 @@ OS:           Windows 7 6.1 amd64
 	}	
 	
 * Create button Log out on html page, sample on list.html
-
+	```html
 	<div class="ui header right aligned">
 		<form name="f" th:action="@{/logout}" method="post">
 			<input type="submit" value="logout" />
 		</form>
 	</div>
-	
-<<<=======================
+	```
 
 * Move Security to database
 * Create entity database users
