@@ -310,6 +310,7 @@ OS:           Windows 7 6.1 amd64
 * create folder templates.alamat di src/main/resources
 * letakan file list.html didalam folder templates.alamat tsb
 * create list.html untuk data daftar alamat
+	'''html
 	<!DOCTYPE html>
 	<html>
 	<head>
@@ -320,7 +321,7 @@ OS:           Windows 7 6.1 amd64
 		<h1>Daftar Alamat</h1>
 	</body>
 	</html>
-
+	'''
 * add spring.thymeleaf.cache=false to application.properties for relauch page
 
 	-Development profile with templates and static resources reloading
