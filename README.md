@@ -45,7 +45,7 @@ OS:           Windows 7 6.1 amd64
 * import hasil generate start.spring.io dengan folder web-services sebagai Existing Gradle Project
 * create package id.co.hanoman.training.webservices.entity yang didalam nya akan di buat file entity java (contoh: Alamat.java)
 * create Pojo Alamat.java di dalam package id.co.hanoman.training.entity
-	
+	```java
 	package id.co.hanoman.training.webservices.entity;
 
 	public class Alamat {
@@ -66,7 +66,7 @@ OS:           Windows 7 6.1 amd64
 		@Column(nullable=false, length=5)
 		private int kodepos;	
 	}
-	
+	```
 * file entity gunakan library lombok untuk generate getter setter etc, 
 * setting dependency lombok pada gradle, jika tidak bisa gunakan java - jar lombok.jar /path/to/eclipse agar config.ini eclipse berubah
 * klo masih belum lombok terpasang di project, add dependency di gradle compileOnly "org.projectlombok:lombok:1.16.16"
@@ -95,11 +95,11 @@ OS:           Windows 7 6.1 amd64
 
 * create package id.co.hanoman.training.webservices.dao untuk lokasi file interface dao data acces object
 * create interface AlamatDao.java dengan class nya di extends PagingAndSortingRepository<Alamat, String>
-
+	```java
 	public interface AlamatDao extends PagingAndSortingRepository<Alamat, String>{
 		
 	}
-	
+	```
 	Alamat refer ke entity Alamat.java sedang string refer ke type id dari entity yaitu String
 	(interface = java yang tidak punya methode konkrit, jadi methode nya abstrak)
 
@@ -109,7 +109,7 @@ OS:           Windows 7 6.1 amd64
 
 * create package untuk id.co.hanoman.training.webservices.controller, lalu buat file controllernya (contoh=AlamatController.java)
 	create rest untuk mendapatkan semua record pada table database
-
+	```java
 	@RestController
 	@RequestMapping("/api")
 	public class AlamatController {
@@ -122,7 +122,7 @@ OS:           Windows 7 6.1 amd64
 			return ad.findAll(page);
 		}
 	}
-	
+	```
 * pada console log ada Warn
 	WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+
 	untuk perbaiki hasil log tambahkan ?useSSL=false pada spring.datasource.url=jdbc:mysql://192.168.227.133:3306/latihan menjadi
@@ -136,7 +136,7 @@ OS:           Windows 7 6.1 amd64
 
 * create rest untuk mendapatkan record berdasarkan id pada table database
 	tambahkan script berikut ke AlamatController.java
-
+	```java
 	@RequestMapping(value="/alamat/{id}", method=RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Alamat> cariAlamatById(@PathVariable("id") String id){
@@ -146,7 +146,7 @@ OS:           Windows 7 6.1 amd64
 		}
 		return new ResponseEntity<>(hasil, HttpStatus.OK);
 	}
-	
+	```
 * Test fungsi get menggunakan Chrome Apps : REST Console
 	Methode Get All
 	masukan di Target Request Url : http://localhost:8080/api/alamat
@@ -215,14 +215,14 @@ OS:           Windows 7 6.1 amd64
 	
 * create Rest untuk PUT table database
 	tambahkan script berikut ke AlamatController.java
-	
+	```java
 	@RequestMapping(value="/alamat/{id}", method=RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void updateAlamat(@PathVariable("id") String id, @RequestBody @Valid Alamat a){
 		a.setId(id);
 		ad.save(a);
 	}
-
+	```
 * Test POST menggunakan Rest Console
 	masukan di Target Request Url : http://localhost:8080/api/alamat/3b
 	Body Content Header Content Type : application/json
@@ -245,13 +245,13 @@ OS:           Windows 7 6.1 amd64
 	
 * create Rest untuk DELETE table database
 	tambahkan script berikut ke AlamatController.java
-
+	```java
 	@RequestMapping(value="/alamat/{id}", method=RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void hapusAlamat(@PathVariable("id") String id){
 		ad.delete(id);
 	}
-	
+	```
 * Test DELETE menggunakan Rest Console
 	masukan di Target Request Url : http://localhost:8080/api/alamat/3b
 	Tekan button DELETE
@@ -268,19 +268,23 @@ OS:           Windows 7 6.1 amd64
 =========================================================================
 * Test RestAPI menggunakan SOAPUI
 * create method daftarAlamat di AlamatController.java dengan method Get
+		```java
 		@RequestMapping(value="/alamat", method=RequestMethod.GET)	
 		public Page<Alamat> daftarAlamat(Pageable page){
 			return ad.findAll(page);
 		}
+		```
 * Test menggunakan SOAPUI dengan Endpoint http://localhost:8080 dan Resource /api/alamat
 * method GET tekan Submit akan menghasilkan data JSON
 
 * create method insertAlamatBaru di AlamatController.java dengan method POST
+		```java
 		@RequestMapping(value="/alamat", method=RequestMethod.POST)
 		@ResponseStatus(HttpStatus.CREATED)
 		public void insertAlamatBaru(@RequestBody @Valid Alamat a){
 			ad.save(a);
 		}
+		```
 * Test menggunakan SOAPUI dengan Endpoint http://localhost:8080 dan Resource /api/alamat
 * method POST tekan Submit akan menghasilkan data JSON
 
@@ -292,7 +296,7 @@ OS:           Windows 7 6.1 amd64
 * Membuat halaman view dengan angularjs
 
 * create file WebConfiguration.java yang di extend from WebMvcConfigurerAdapter di package 
-
+	```java
 	@Configuration
 	public class WebConfiguration extends WebMvcConfigurerAdapter {
 
@@ -301,7 +305,7 @@ OS:           Windows 7 6.1 amd64
 			registry.addViewController("/alamat/list").setViewName("/alamat/list");
 		}
 	}
-	
+	```
 * add dependency spring-boot-starter-thymeleaf to gradle
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	
@@ -372,7 +376,7 @@ OS:           Windows 7 6.1 amd64
 	</div>
 	```
 *	script berikut untuk menampilkan data pada table dengan ng-controller="AlamatController" untuk scope didalam AlamatController pada file app.js
-	
+	```javascript
 	appLatihan.controller('AlamatController', function($http, $scope){
 		$scope.dataAlamat = {};
 		$scope.updateDataAlamat = function(){
@@ -388,7 +392,7 @@ OS:           Windows 7 6.1 amd64
 		};
 		$scope.updateDataAlamat();
 	});
-
+	```
 * create button Hapus di table alamat pada list.html
 	```html
 	<div ng-controller="AlamatController">
@@ -415,7 +419,7 @@ OS:           Windows 7 6.1 amd64
 	</div>
 	```
 * create script ng-click="hapusAlamat(a)" di latihan.js
-
+	```javascript
 	$scope.hapusAlamat = function(x){
 		$http.delete('/api/alamat/'+x.id).then(sukses, gagal);
 		function sukses(response){
@@ -426,7 +430,7 @@ OS:           Windows 7 6.1 amd64
 			alert('Error : '+response)
 		};
 	};
-	
+	```
 * add semantic.min.css to folder /static/css/
 	<link rel="stylesheet" href="/css/semantic.min.css" />
 
@@ -512,7 +516,7 @@ OS:           Windows 7 6.1 amd64
 	</table>
 	```
 * create script ng-click="simpanAlamat()" di latihan js
-
+	```javascript
 	$scope.simpanAlamat = function(){
 		$http.post('/api/alamat/', $scope.alamat).then(sukses, gagal);
 		function sukses(response){
@@ -524,7 +528,7 @@ OS:           Windows 7 6.1 amd64
 			alert('Error : '+response);
 		};
 	};
-	
+	```
 *Create security for web app
 
 * add dependency spring boot starter security to build.gradle, Refresh Gradle Project
@@ -535,7 +539,7 @@ OS:           Windows 7 6.1 amd64
 * use user = user ; password = see in console
 * customize halaman login dengan user dan password sendiri menggunakan In-Memory Authentication
 * create SecurityConfiguration.java 
-
+	```java
 	@Configuration
 	public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -547,9 +551,9 @@ OS:           Windows 7 6.1 amd64
 							.roles("USER");
 		}
 	}
-	
+	```
 	compare 
-	
+	```java
 	@Configuration
 	public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -561,7 +565,7 @@ OS:           Windows 7 6.1 amd64
 						.roles("USER");
 		}		
 	}
-	
+	```
 * create custom halaman login
   add addViewController untuk halaman login yang telah di customize di WebConfiguration.java
 	
@@ -639,7 +643,7 @@ OS:           Windows 7 6.1 amd64
 
 * create Default success url add line on SecurityConfiguration.java
 	.defaultSuccessUrl("/alamat/list", true);
-	
+	```java
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -651,11 +655,12 @@ OS:           Windows 7 6.1 amd64
 				.permitAll()
 			.defaultSuccessUrl("/alamat/list", true);
 	}
-	
+	```
 * Create Log Out add line on SecurityConfiguration.java
+	
 	.and()
 	.logout();
-	
+	```java
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -669,7 +674,7 @@ OS:           Windows 7 6.1 amd64
 				.and()
 			.logout();		
 	}	
-	
+	```
 * Create button Log out on html page, sample on list.html
 	```html
 	<div class="ui header right aligned">
@@ -681,7 +686,7 @@ OS:           Windows 7 6.1 amd64
 
 * Move Security to database
 * Create entity database users
-
+	```java
 	@Entity
 	@Table(name="users")
 	@Data
@@ -701,15 +706,15 @@ OS:           Windows 7 6.1 amd64
 		@Column(name="enabled", columnDefinition="tinyint(1) default 1")
 		private boolean enabled;
 	}
-	
+	```
 * insert sample data user to table users (import.sql)
-
+	```sql
 	insert into users (username, password, enabled) values ('eko','eko123',true);
 	insert into users (username, password, enabled) values ('adi','adi123',true);
 	insert into users (username, password, enabled) values ('edi','edi123',false);
-
+	```
 * Create entity database Authority
-
+	```java
 	@Entity
 	@Table(name="authorities")
 	@Data
@@ -727,16 +732,16 @@ OS:           Windows 7 6.1 amd64
 		@Column(name="authority", nullable=false)
 		private String authority;
 	}
-	
+	```
 * insert sample data autorities ke table Authority (import.sql)
-
+	```sql
 	insert into authorities (id_user, authority) values ('1','Admin');
 	insert into authorities (id_user, authority) values ('1','Operator');
 	insert into authorities (id_user, authority) values ('2','Operator');
 	insert into authorities (id_user, authority) values ('3','operator');
-	
+	```
 * add script to SecurityConfiguration.java
-
+	```java
 	@Autowired
 	private DataSource dataSource;
 	
@@ -749,9 +754,9 @@ OS:           Windows 7 6.1 amd64
 			.authoritiesByUsernameQuery("SELECT u.username, a.authority "
 					+ "FROM users u INNER JOIN authorities a ON u.id = a.id_user WHERE u.username=?");
 	}
-		
+	```
 *  Create CsrfAttributeToCookieFilter.java  di package id.co.hanoman.training.config supaya angular js bisa delete, post, updateDataAlamat
-
+	```java
 	public class CsrfAttributeToCookieFilter extends OncePerRequestFilter {
 			@Override
 			protected void doFilterInternal(HttpServletRequest request,
@@ -771,20 +776,20 @@ OS:           Windows 7 6.1 amd64
 				filterChain.doFilter(request, response);
 			}
 	}
-	
+	```
 * add script berikut ke method configure(HttpSecurity http) di SecurityConfiguration.java agar XSRF-TOKEN muncul di Cookies
 	
 	.addFilterAfter(new CsrfAttributeToCookieFilter(), CsrfFilter.class);
 
 * belum bisa hapus atau post walaupun cookies sudah ada XSRF-TOKEN karena di server nama token nya belum X-XSRF-TOKEN
 * add method ke SecurityConfiguration.java untuk membuat nama token di server X-XSRF-TOKEN, sehingga sama dengan di klien
-
+	```java
 	private CsrfTokenRepository csrfTokenRepository() {
 		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
 		repository.setHeaderName("X-XSRF-TOKEN");
 		return repository;
 	}
-	
+	```
 * add script berikut ke methode configure(HttpSecurity http) di SecurityConfiguration.java agar nama token di server sama X-XSRF-TOKEN
 
 	.csrf().csrfTokenRepository(csrfTokenRepository());
