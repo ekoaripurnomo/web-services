@@ -285,23 +285,23 @@ OS:           Windows 7 6.1 amd64
 =========================================================================
 * Test RestAPI menggunakan SOAPUI
 * create method daftarAlamat di AlamatController.java dengan method Get
-		```java
-		@RequestMapping(value="/alamat", method=RequestMethod.GET)	
-		public Page<Alamat> daftarAlamat(Pageable page){
-			return ad.findAll(page);
-		}
-		```
+	```java
+	@RequestMapping(value="/alamat", method=RequestMethod.GET)	
+	public Page<Alamat> daftarAlamat(Pageable page){
+		return ad.findAll(page);
+	}
+	```
 * Test menggunakan SOAPUI dengan Endpoint http://localhost:8080 dan Resource /api/alamat
 * method GET tekan Submit akan menghasilkan data JSON
 
 * create method insertAlamatBaru di AlamatController.java dengan method POST
-		```java
-		@RequestMapping(value="/alamat", method=RequestMethod.POST)
-		@ResponseStatus(HttpStatus.CREATED)
-		public void insertAlamatBaru(@RequestBody @Valid Alamat a){
-			ad.save(a);
-		}
-		```
+	```java
+	@RequestMapping(value="/alamat", method=RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED)
+	public void insertAlamatBaru(@RequestBody @Valid Alamat a){
+		ad.save(a);
+	}
+	```
 * Test menggunakan SOAPUI dengan Endpoint http://localhost:8080 dan Resource /api/alamat
 * method POST tekan Submit akan menghasilkan data JSON
 
