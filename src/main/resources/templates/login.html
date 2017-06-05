@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Please Sign In</title>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+<link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+
+	<div class="container">
+
+      <form class="form-signin" th:action="@{/login}" method="post">
+      	<div th:if="${param.error}" class="alert alert-error">Invalid username and password.</div>
+		<div th:if="${param.logout}" class="alert alert-success">You have been logout.</div>
+		
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="true" autofocus="true" />
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="true" />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+	
+	<script src="js/bootstrap.min.js" />
+</body>
+</html>
