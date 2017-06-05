@@ -32,6 +32,7 @@ OS:           Windows 7 6.1 amd64
 * Create Database latihan
 * create mysql gradle depedencies
 * generate springboot app dari https://start.spring.io/
+	```
 	Generate Gradle Project, Java Spring Boot 1.5.3
 	Group : id.co.hanoman.training.webservices
 	Artifact : web-services
@@ -41,6 +42,7 @@ OS:           Windows 7 6.1 amd64
 	Packaging : Jar
 	Java Version : 1.8
 	Dependency : MySQL , yang lainnya di tambahkan sambil jalan
+	```
 * Create main java application, biasanya klo generate dari https://start.spring.io/ sudah ada file java nya
 * import hasil generate start.spring.io dengan folder web-services sebagai Existing Gradle Project
 * create package id.co.hanoman.training.webservices.entity yang didalam nya akan di buat file entity java (contoh: Alamat.java)
@@ -71,28 +73,28 @@ OS:           Windows 7 6.1 amd64
 * setting dependency lombok pada gradle, jika tidak bisa gunakan java - jar lombok.jar /path/to/eclipse agar config.ini eclipse berubah
 * klo masih belum lombok terpasang di project, add dependency di gradle compileOnly "org.projectlombok:lombok:1.16.16"
 * add config di application.properties agar terhubung ke database
-	
+	```
 	spring.datasource.url=jdbc:mysql://192.168.227.133:3306/latihan
 	spring.datasource.username=root
 	spring.datasource.password=123456
 	spring.datasource.driver-class-name=com.mysql.jdbc.Driver	
-	
+	```
 * add script to application.properties agar table alamat hasil dari entity Alamat.java dapat di buat
-
+	```
 	spring.jpa.generate-ddl=true
-
+	```
 * create data init untuk mengisi table alamat dengan membuat file import.sql di src/main/resources
-	
+	```
 	insert into alamat (id, jalan, kota, propinsi, kodepos) values ('1b','Jalan Penggilingan','Cakung','Jakarta Timur',13940);
 	insert into alamat (id, jalan, kota, propinsi, kodepos) values ('2b','Jalan Komarudin','Cakung','Jakarta Timur',13940);
 	insert into alamat (id, jalan, kota, propinsi, kodepos) values ('3b','Jalan Duku','Kebon Jeruk','Jakarta Pusat',57890);
 	insert into alamat (id, jalan, kota, propinsi, kodepos) values ('4b','Jalan Kelapa','Jagakarsa','Jakarta Selatan',23956);
 	insert into alamat (id, jalan, kota, propinsi, kodepos) values ('5b','Jalan Patriot','Bekasi Barat','Bekasi',47863);
-
+	```
 * add script to application.properties agar data di import.sql masuk kedalam table alamat
-
+	```
 	spring.jpa.hibernate.ddl-auto=create	
-
+	```
 * create package id.co.hanoman.training.webservices.dao untuk lokasi file interface dao data acces object
 * create interface AlamatDao.java dengan class nya di extends PagingAndSortingRepository<Alamat, String>
 	```java
@@ -148,10 +150,12 @@ OS:           Windows 7 6.1 amd64
 	}
 	```
 * Test fungsi get menggunakan Chrome Apps : REST Console
+	```
 	Methode Get All
 	masukan di Target Request Url : http://localhost:8080/api/alamat
 	Tekan button GET
-	
+	```
+	```
 	{
     "content": [{
         "id": "1b",
@@ -171,11 +175,13 @@ OS:           Windows 7 6.1 amd64
 			"first": true,
 			"numberOfElements": 5
 	}
-	
+	```
+	```
 	Methode Get By Id
 	masukan di Target Request Url : http://localhost:8080/api/alamat/3b
 	Tekan button GET
-	
+	```
+	```
 	{
 			"id": "3b",
 			"jalan": "Jalan Duku",
@@ -183,26 +189,30 @@ OS:           Windows 7 6.1 amd64
 			"propinsi": "Jakarta Pusat",
 			"kodepos": 57890
 	}
-	
+	```
 * create Rest untuk POST table database
 	tambahkan script berikut ke AlamatController.java
-	
+	```java
 	@RequestMapping(value="/alamat", method=RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void insertAlamatBaru(@RequestBody @Valid Alamat a){
 		ad.save(a);
 	}
-	
+	```
 * Test POST menggunakan Rest Console
+	```
 	masukan di Target Request Url : http://localhost:8080/api/alamat
 	Body Content Header Content Type : application/json
 	Request Payload Raw Body :
+	```
+	```
 		{
 			"jalan": "Jalan Duren Runtuh",
 			"kota": "Duren Kuning",
 			"propinsi": "Buah Duren",
 			"kodepos": 88888
 		}
+	```
 	Tekan button POST	
 	didapat Response Headers 
 	
@@ -224,15 +234,20 @@ OS:           Windows 7 6.1 amd64
 	}
 	```
 * Test POST menggunakan Rest Console
+	```
 	masukan di Target Request Url : http://localhost:8080/api/alamat/3b
 	Body Content Header Content Type : application/json
 	Request Payload Raw Body :
+	```
+	```
 		{
 			"jalan" : "Jalan Duku Tuh",
 			"kota" : "Kebon Jeruk Tuh",
 			"propinsi" : "Jakarta Pusat Tuh",
 			"kodepos" : 57897
 		}
+	```
+	```
 	Tekan button PUT
 	didapat Response Header 
 	
@@ -253,9 +268,11 @@ OS:           Windows 7 6.1 amd64
 	}
 	```
 * Test DELETE menggunakan Rest Console
+	```
 	masukan di Target Request Url : http://localhost:8080/api/alamat/3b
 	Tekan button DELETE
 	didapat Response Header
+	```
 	
 	Status Code: 200
 	Date: Thu, 01 Jun 2017 09:57:25 GMT
