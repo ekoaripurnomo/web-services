@@ -323,18 +323,16 @@ OS:           Windows 7 6.1 amd64
 
 * add spring.thymeleaf.cache=false to application.properties for relauch page
 
-	#
-	# Development profile with templates and static resources reloading
-	#
-
-	# Path to project
+	-Development profile with templates and static resources reloading
+	
+	-Path to project
 	project.base-dir=file:///D:/Data/Training/web-services
 
-	# Templates reloading during development
+	-Templates reloading during development
 	spring.thymeleaf.prefix=${project.base-dir}/src/main/resources/templates/
 	spring.thymeleaf.cache=false
 
-	# Static resources reloading during development
+	-Static resources reloading during development
 	spring.resources.static-locations=${project.base-dir}/src/main/resources/static/
 	spring.resources.cache-period=0
 
