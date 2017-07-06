@@ -8,17 +8,20 @@ Create web use Rest
 * Extract gradle-3.5-bin.zip copy content ke folder C:\Gradle
 * Setting Path pada Environment Variables untuk folder bin content Gradle, contoh C:\Gradle\bin atau C:\Gradle\gradle-3.5\bin Save
 * buka command promp ketik ..\gradle -v
-------------------------------------------------------------
-Gradle 3.5
-------------------------------------------------------------
 
-Build time:   2017-04-10 13:37:25 UTC
-Revision:     b762622a185d59ce0cfc9cbc6ab5dd22469e18a6
+	```gradle
+	------------------------------------------------------------
+	Gradle 3.5
+	------------------------------------------------------------
 
-Groovy:       2.4.10
-Ant:          Apache Ant(TM) version 1.9.6 compiled on June 29 2015
-JVM:          1.8.0_101 (Oracle Corporation 25.101-b13)
-OS:           Windows 7 6.1 amd64
+	Build time:   2017-04-10 13:37:25 UTC
+	Revision:     b762622a185d59ce0cfc9cbc6ab5dd22469e18a6
+
+	Groovy:       2.4.10
+	Ant:          Apache Ant(TM) version 1.9.6 compiled on June 29 2015
+	JVM:          1.8.0_101 (Oracle Corporation 25.101-b13)
+	OS:           Windows 7 6.1 amd64
+	```
 
 * Gradle telah berhasil di instal
 
