@@ -655,13 +655,14 @@ Create web use Rest
 	</html>
 	```
 * karena halaman login ini di buat menggunakan bootstrap maka siapkan lokasi untuk file css dan js jika di perlukan pada folder /static/js dan /statis/css didalam package src/main/resources
+	```txt
 	static/css/
 						bootstrap.min.css
 						bootstrap-theme.min.css
 						app.css
 	static/js/
 						bootstrap.min.js
-						
+	```					
 * test gradle bootRun
 
 * create Default success url add line on SecurityConfiguration.java
