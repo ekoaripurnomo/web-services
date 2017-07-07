@@ -349,16 +349,19 @@ Create web use Rest
 	-Development profile with templates and static resources reloading
 	
 	-Path to project
+	```txt
 	project.base-dir=file:///D:/Data/Training/web-services
-
+	```
 	-Templates reloading during development
+	```txt
 	spring.thymeleaf.prefix=${project.base-dir}/src/main/resources/templates/
 	spring.thymeleaf.cache=false
-
+	```
 	-Static resources reloading during development
+	```txt
 	spring.resources.static-locations=${project.base-dir}/src/main/resources/static/
 	spring.resources.cache-period=0
-
+	```
 
 * add <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" /> to list html
 * create app.js di folder /static/js/
@@ -606,7 +609,7 @@ Create web use Rest
 	</html>
 	```
 * add script SecurityConfiguration.java
-
+	```java
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -617,7 +620,7 @@ Create web use Rest
 				.loginPage("/login")
 				.permitAll();			
 	}
-	
+	```
 * perbaiki halaman login.html diatas sehingga bisa digunakan untuk login	
 	```html
 	<!DOCTYPE html>
