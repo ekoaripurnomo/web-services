@@ -52,7 +52,10 @@ Create web use Rest
 * create Pojo Alamat.java di dalam package id.co.hanoman.training.entity
 	```java
 	package id.co.hanoman.training.webservices.entity;
-
+	
+	@Entity
+	@Table(name="alamat")
+	@Data
 	public class Alamat {
 		@Id
 		@GeneratedValue(generator="uuid")
